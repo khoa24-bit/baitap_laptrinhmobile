@@ -61,6 +61,25 @@ class TextDetailScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.popUntil(context, (route) => route.isFirst);
+          },
+          child: Text("Home"),
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            textStyle: TextStyle(fontSize: 18),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+              side: BorderSide(color: Colors.blue, width: 1),
+            ),
+            backgroundColor: Colors.blue[500],
+            foregroundColor: Colors.white,
+          ),
+        ),
+      ),
     );
   }
 }
