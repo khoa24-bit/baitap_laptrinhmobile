@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "133680605092",
+    "project_id": "baitaplaptrinhmobile",
+    "storage_bucket": "baitaplaptrinhmobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133680605092:android:31e8094b589a730c878331",
+        "android_client_info": {
+          "package_name": "com.example.age_checker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "133680605092-ck8sa0m7ls2h8j3b3004l1hge7t64npp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.age_checker",
+            "certificate_hash": "46c1a9c5659932fd10f98d189c3381946c417b1d"
+          }
+        },
+        {
+          "client_id": "133680605092-6cmuvrbtbq6hp10b4gkq94df6bg7fg3j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0RsETMoBcyr9TQ3nLkFrdyX9oKUZ_Nec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "133680605092-6cmuvrbtbq6hp10b4gkq94df6bg7fg3j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "133680605092-3trmbccpobkbrgaikkpet7urgq0ednan.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ageChecker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
