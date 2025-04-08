@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +33,7 @@ class AuthGate extends StatelessWidget {
           if (snapshot.hasData) {
             return HomeScreen(user: snapshot.data!);
           }
-          return SignInScreen();
+          return SignInScreen(); // Nếu chưa đăng nhập, quay lại màn hình đăng nhập
         }
         return Scaffold(body: Center(child: CircularProgressIndicator()));
       },
@@ -120,6 +121,35 @@ class HomeScreen extends StatelessWidget {
 
   HomeScreen({required this.user});
 
+  // Function to clear the local storage cache
+  Future<void> clearCache() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();  // Clears all the data in SharedPreferences
+  }
+
+  Future<void> _signOut(BuildContext context) async {
+    try {
+      // Xóa bộ nhớ cache (SharedPreferences, nếu có)
+      await clearCache();
+
+      // Đăng xuất khỏi Google
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      await googleSignIn.signOut();
+      
+      // Đăng xuất khỏi Firebase
+      await FirebaseAuth.instance.signOut();
+
+      // Sau khi đăng xuất, điều hướng người dùng về màn hình đăng nhập
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => SignInScreen()),
+        (Route<dynamic> route) => false,  // Loại bỏ tất cả các route hiện tại
+      );
+    } catch (e) {
+      // Xử lý lỗi nếu cần
+      print('Error during sign out: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,9 +159,7 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () async {
-                await FirebaseAuth.instance.signOut();
-              },
+              onPressed: () => _signOut(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
@@ -140,7 +168,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Login by Gmail',
+                'Đăng xuất',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ),
